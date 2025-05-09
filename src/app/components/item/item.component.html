@@ -1,0 +1,29 @@
+<div class="container">
+    <h2 class="title">Lista de Itens</h2>
+  
+    <ul class="item-list">
+      <li *ngFor="let item of itens" class="item">
+        <div *ngIf="itemEditandoId !== item.id; else editando">
+          <span>{{ item.nome }}</span>
+          <button (click)="editarItem(item.id, item.nome)" class="edit-btn">Editar</button>
+          <button (click)="deletarItem(item.id)" class="delete-btn">Excluir</button>
+        </div>
+        
+        <ng-template #editando>
+          <input [(ngModel)]="novoNomeItem" class="edit-field">
+          <button (click)="atualizarItem()" class="save-btn">Salvar</button>
+          <button (click)="cancelarEdicao()" class="cancel-btn">Cancelar</button>
+        </ng-template>
+      </li>
+    </ul>
+  
+    <div class="add-form">
+      <input 
+        [(ngModel)]="novoItem.nome" 
+        placeholder="Nome do item"
+        class="input-field"
+        (keyup.enter)="adicionarItem()"
+      >
+      <button (click)="adicionarItem()" class="add-btn">Adicionar</button>
+    </div>
+  </div>
